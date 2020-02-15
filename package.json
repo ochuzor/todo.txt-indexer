@@ -1,0 +1,46 @@
+{
+  "version": "2.0.0",
+  "license": "MIT",
+  "description": "a javascript library for indexing and searching todo.txt texts",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "np": "np"
+  },
+  "peerDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "tabWidth": 4
+  },
+  "name": "@ochuzor/todo.txt-indexer",
+  "author": "ochuzor",
+  "module": "dist/todo.txt-parser.esm.js",
+  "devDependencies": {
+    "@types/jest": "^25.1.1",
+    "husky": "^4.2.1",
+    "np": "^6.0.0",
+    "tsdx": "^0.12.3",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ochuzor/todo.txt-indexer"
+  }
+}
