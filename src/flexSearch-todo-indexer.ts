@@ -1,8 +1,7 @@
 import { cloneDeep, map } from 'lodash';
 
 import { ITodoIndexer } from './ITodoIndexer';
-import { TodoIndexModel, TodoDocResponseModel } from './doc-interfaces';
-import { IdType } from './doc-interfaces';
+import { TodoIndexModel, TodoDocResponseModel, IdType } from './doc-interfaces';
 import FlexSearch from 'flexsearch';
 
 const defaultOptions = {
