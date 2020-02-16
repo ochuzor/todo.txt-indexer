@@ -43,5 +43,9 @@
     "type": "git",
     "url": "https://github.com/ochuzor/todo.txt-indexer"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@types/lodash": "^4.14.149",
+    "flexsearch": "^0.6.32",
+    "lodash": "^4.17.15"
+  }
 }
