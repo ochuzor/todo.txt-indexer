@@ -23,8 +23,9 @@ const indexDtoToTodoDoc = (dto: TodoIndexDto):ITodoDoc  => {
 export class FuseJsTodoIndexer implements ITodoIndexer {
     private _isDataModified = true;
     private fuse: Fuse<ITodoDoc, Fuse.FuseOptions<TodoIndexDto>>;
+    private _data: TodoIndexDto [] = [];
 
-    constructor(private _data: TodoIndexDto [] = []) {
+    constructor() {
         this.fuse = new Fuse(this._data, options);
     }
 
@@ -72,7 +73,7 @@ export class FuseJsTodoIndexer implements ITodoIndexer {
         this._isDataModified = false;
 
         const _query = textToIndexDto(query);
-        const opts = _.omit(_query, ['description']);
+        const opts = _.pickBy(_.omit(_query, ['description', 'id']), value => value.length > 0);
 
         if (!_.isEmpty(_query.description)) {
             const ls = this.fuse.search(_query.description);
