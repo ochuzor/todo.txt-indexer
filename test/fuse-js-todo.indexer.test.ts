@@ -5,7 +5,7 @@ import {FuseJsTodoIndexer} from '../src/fuse-js-todo.indexer';
 const fixturesTxtFile = path.join(__dirname, './fixtures/todo-docs.txt')
 const todoDocsTxt = fs.readFileSync(fixturesTxtFile, 'utf8');
 const docs = todoDocsTxt.split('\n').filter(txt => !!txt.trim())
-    .map((txt, i) => ({id: i + 1, text: txt}));
+    .map((txt, i) => ({id: i + 1, text: txt.trim()}));
 
 describe('FuseJsTodoIndexer', () => {
     let indexer: FuseJsTodoIndexer;
@@ -15,7 +15,7 @@ describe('FuseJsTodoIndexer', () => {
     });
 
     it('should search by', () => {
-        const result = indexer.search('phone');
+        const result = indexer.search('(A) mom @phone');
         console.log('result:', JSON.stringify(result));
         expect(result).toBeNull();
     })

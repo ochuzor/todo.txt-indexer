@@ -7,9 +7,9 @@ import { IdType, ITodoDoc, ITodoIndexer} from './todo-doc-types';
 const options: Fuse.FuseOptions<TodoIndexDto> = {
     keys: [
         'description',
-        'priority',
-        'dateOfCreation',
-        'dateOfCompletion',
+        // 'priority',
+        // 'dateOfCreation',
+        // 'dateOfCompletion',
         'projects',
         'contexts',
         'tags',
@@ -19,6 +19,16 @@ const options: Fuse.FuseOptions<TodoIndexDto> = {
 const indexDtoToTodoDoc = (dto: TodoIndexDto):ITodoDoc  => {
     return _.pick(dto, ['id', 'text']);
 }
+
+interface SearchFilterOpts {
+    priority?: string;
+    dateOfCreation?: string;
+    dateOfCompletion?: string;
+}
+const getOpts = (dto: TodoIndexDto):SearchFilterOpts => {
+    const opts = _.pick(dto, ['priority', 'dateOfCreation', 'dateOfCompletion']);
+    return _.pickBy(opts, value => value.length > 0);
+};
 
 export class FuseJsTodoIndexer implements ITodoIndexer {
     private _isDataModified = true;
@@ -73,7 +83,10 @@ export class FuseJsTodoIndexer implements ITodoIndexer {
         this._isDataModified = false;
 
         const _query = textToIndexDto(query);
-        const opts = _.pickBy(_.omit(_query, ['description', 'id']), value => value.length > 0);
+        // const opts = _.pickBy(_.omit(_query, ['description', 'id']), value => value.length > 0);
+        // const opts = _.pick(_.pickBy(_.omit(_query, ['description', 'id']), value => value.length > 0), 
+        //     ['priority', 'dateOfCreation', 'dateOfCompletion']);
+        const opts = getOpts(_query);
 
         if (!_.isEmpty(_query.description)) {
             const ls = this.fuse.search(_query.description);
