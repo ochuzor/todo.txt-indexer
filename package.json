@@ -44,6 +44,7 @@
     "url": "https://github.com/ochuzor/todo.txt-indexer"
   },
   "dependencies": {
+    "@ochuzor/todo.txt-parser": "^2.1.0",
     "@types/lodash": "^4.14.149",
     "flexsearch": "^0.6.32",
     "fuse.js": "^3.4.6",
