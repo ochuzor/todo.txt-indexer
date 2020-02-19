@@ -3,6 +3,6 @@
 Post signs around the neighborhood +GarageSale
 @GroceryStore Eskimo pies
 (A) Call Mom
-Really gotta call Mom (A) @phone @someday
+x Really gotta call Mom (A) @phone @someday
 (b) Get back to the boss
 (B)->Submit TPS report
