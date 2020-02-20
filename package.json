@@ -49,5 +49,10 @@
     "flexsearch": "^0.6.32",
     "fuse.js": "^3.4.6",
     "lodash": "^4.17.15"
-  }
+  },
+  "keywords": [
+    "todo.txt",
+    "search",
+    "text retrieval"
+  ]
 }
