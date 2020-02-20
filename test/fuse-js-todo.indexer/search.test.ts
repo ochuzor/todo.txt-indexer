@@ -28,19 +28,25 @@ describe('FuseJsTodoIndexer.search', () => {
 
     it('should search with contexts', () => {
         const result = indexer.search('@GroceryStore');
-        const containsWord = result.every(doc => doc.text.includes('GroceryStore'));
+        const containsWord = result.every(doc =>
+            doc.text.includes('GroceryStore')
+        );
         expect(containsWord).toBeTruthy();
     });
 
     it('should search with projects', () => {
         const result = indexer.search('+TodoTxtTouch');
-        const containsWord = result.every(doc => doc.text.includes('TodoTxtTouch'));
+        const containsWord = result.every(doc =>
+            doc.text.includes('TodoTxtTouch')
+        );
         expect(containsWord).toBeTruthy();
     });
 
     it('should search with description', () => {
         const result = indexer.search('xylophone');
-        const containsWord = result.every(doc => doc.text.includes('xylophone'));
+        const containsWord = result.every(doc =>
+            doc.text.includes('xylophone')
+        );
         expect(containsWord).toBeTruthy();
     });
 
