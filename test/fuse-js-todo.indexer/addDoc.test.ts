@@ -20,7 +20,7 @@ describe('FuseJsTodoIndexer.addDoc', () => {
         expect(countAfter).toEqual(countBefore + 1);
     });
 
-    it('shoule replace an existing doc', () => {
+    it('should replace an existing doc', () => {
         const doc = { id: 101, text: 'write a test for @test' };
         indexer.addDoc(doc);
         const res1 = indexer.getDoc(doc.id);

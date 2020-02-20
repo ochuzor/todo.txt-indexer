@@ -5,7 +5,7 @@ import { textToIndexDto, TodoIndexDto } from '@ochuzor/todo.txt-parser';
 import { IdType, ITodoDoc, ITodoIndexer } from './todo-doc-types';
 
 const options: Fuse.FuseOptions<TodoIndexDto> = {
-    threshold: 0.4,
+    threshold: 0.3,
     keys: [
         // 'isCompleted',
         // 'priority',
