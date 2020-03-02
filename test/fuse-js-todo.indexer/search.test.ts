@@ -13,13 +13,6 @@ describe('FuseJsTodoIndexer.search', () => {
         docs.forEach(doc => indexer.addDoc(doc));
     });
 
-    it('should search by priority', () => {
-        const result = indexer.search('(A)');
-        expect(result).toHaveLength(6);
-        const hasPriority = result.every(doc => doc.text.includes('(A) '));
-        expect(hasPriority).toBeTruthy();
-    });
-
     it('should search an empty index', () => {
         indexer = new FuseJsTodoIndexer();
         expect(indexer.getAll()).toHaveLength(0);
@@ -50,16 +43,13 @@ describe('FuseJsTodoIndexer.search', () => {
         expect(containsWord).toBeTruthy();
     });
 
-    it('should search with isCompleted', () => {
-        const result = indexer.search('x');
-        const allStartsWithX = result.every(doc => doc.text.startsWith('x'));
-        expect(allStartsWithX).toBeTruthy();
-    });
-
     it('should search with multiple words', () => {
         const term = 'Call Mom';
         const result = indexer.search(term);
-        const allContainsWord = result.every(doc => doc.text.includes(term));
+
+        const allContainsWord = result.every(doc =>
+            doc.text.toLocaleLowerCase().includes('call mom')
+        );
         expect(allContainsWord).toBeTruthy();
     });
 
@@ -73,10 +63,13 @@ describe('FuseJsTodoIndexer.search', () => {
     it('should search with priority and description', () => {
         const term = '(A) Call Mom';
         const result = indexer.search(term);
+
         let allContainsWord = result.every(doc => doc.text.includes('(A)'));
         expect(allContainsWord).toBeTruthy();
 
-        allContainsWord = result.every(doc => doc.text.includes('Call Mom'));
+        allContainsWord = result.every(doc =>
+            doc.text.toLocaleLowerCase().includes('call mom')
+        );
         expect(allContainsWord).toBeTruthy();
     });
 });

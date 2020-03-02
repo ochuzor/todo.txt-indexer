@@ -1,21 +1,15 @@
-import { ITodoIndexer } from '../ITodoIndexer';
-import {
-    IdType,
-    TodoIndexModel,
-    TodoDocResponseModel,
-} from '../doc-interfaces';
+import { IdType, ITodoDoc as ITodo, ITodoIndexer } from './todo-doc-types';
 
 export abstract class AbstractArrayTodoIndexer implements ITodoIndexer {
-    constructor(public _data: TodoIndexModel[] = []) {}
+    constructor(protected _data: ITodo[] = []) {}
 
-    NextId(): number {
+    NextId(): IdType {
         return this._data.length;
     }
 
-    addDoc(doc: TodoIndexModel): void {
+    addDoc(doc: ITodo): void {
         const index = this._data.findIndex(d => d.id === doc.id);
         const cp = Object.assign({}, doc);
-
         if (index !== -1) {
             this._data.splice(index, 1, cp);
         } else {
@@ -23,8 +17,10 @@ export abstract class AbstractArrayTodoIndexer implements ITodoIndexer {
         }
     }
 
-    getDoc(id: IdType): TodoDocResponseModel | null {
-        return this._data.find(doc => doc.id === id) || null;
+    getDoc(id: IdType): ITodo {
+        const doc = this._data.find(doc => doc.id === id);
+        if (!doc) return { id, text: '' };
+        return Object.assign({}, doc);
     }
 
     deleteDoc(id: IdType): void {
@@ -34,7 +30,7 @@ export abstract class AbstractArrayTodoIndexer implements ITodoIndexer {
         }
     }
 
-    getAll(): TodoDocResponseModel[] {
+    getAll(): ITodo[] {
         return this._data.map(doc => {
             return {
                 id: doc.id,
@@ -43,5 +39,5 @@ export abstract class AbstractArrayTodoIndexer implements ITodoIndexer {
         });
     }
 
-    abstract search(query: object): TodoDocResponseModel[];
+    abstract search(query: string): ITodo[];
 }
