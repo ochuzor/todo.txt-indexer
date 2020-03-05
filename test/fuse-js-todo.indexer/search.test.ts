@@ -21,6 +21,8 @@ describe('FuseJsTodoIndexer.search', () => {
 
     it('should search with contexts', () => {
         const result = indexer.search('@GroceryStore');
+
+        expect(result.length).toBeGreaterThan(0);
         const containsWord = result.every(doc =>
             doc.text.includes('GroceryStore')
         );
@@ -29,6 +31,8 @@ describe('FuseJsTodoIndexer.search', () => {
 
     it('should search with projects', () => {
         const result = indexer.search('+TodoTxtTouch');
+
+        expect(result.length).toBeGreaterThan(0);
         const containsWord = result.every(doc =>
             doc.text.includes('TodoTxtTouch')
         );
@@ -37,6 +41,8 @@ describe('FuseJsTodoIndexer.search', () => {
 
     it('should search with description', () => {
         const result = indexer.search('xylophone');
+
+        expect(result.length).toBeGreaterThan(0);
         const containsWord = result.every(doc =>
             doc.text.includes('xylophone')
         );
@@ -47,27 +53,8 @@ describe('FuseJsTodoIndexer.search', () => {
         const term = 'Call Mom';
         const result = indexer.search(term);
 
+        expect(result.length).toBeGreaterThan(0);
         const allContainsWord = result.every(doc =>
-            doc.text.toLocaleLowerCase().includes('call mom')
-        );
-        expect(allContainsWord).toBeTruthy();
-    });
-
-    it('should search by date of creation', () => {
-        const term = '2011-03-02';
-        const result = indexer.search(term);
-        const allContainsWord = result.every(doc => doc.text.includes(term));
-        expect(allContainsWord).toBeTruthy();
-    });
-
-    it('should search with priority and description', () => {
-        const term = '(A) Call Mom';
-        const result = indexer.search(term);
-
-        let allContainsWord = result.every(doc => doc.text.includes('(A)'));
-        expect(allContainsWord).toBeTruthy();
-
-        allContainsWord = result.every(doc =>
             doc.text.toLocaleLowerCase().includes('call mom')
         );
         expect(allContainsWord).toBeTruthy();
