@@ -9,10 +9,6 @@ export abstract class AbstractArrayTodoIndexer<TTodo extends ITodoDoc>
     implements ITodoIndexer {
     constructor(protected _data: TTodo[] = []) {}
 
-    NextId(): IdType {
-        return this._data.length;
-    }
-
     addDoc(doc: ITodoDoc): void {
         const index = this._data.findIndex(d => d.id === doc.id);
         const _doc = this.mapToIndexDoc(doc);
